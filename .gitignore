@@ -1,0 +1,7 @@
+.vscode
+ansible/vars.yml
+tf/terraform.tfstate
+tf/terrarform.tfstate.backup
+tf/terraform.tfvars
+tf/.terraform
+

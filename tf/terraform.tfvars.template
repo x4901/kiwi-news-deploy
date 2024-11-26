@@ -1,0 +1,3 @@
+pub_ssh = "ssh-rsa ... your public ssh key"
+hcloud_token = "your Hetzner token"
+ssh_keyname = "name of your ssh key"

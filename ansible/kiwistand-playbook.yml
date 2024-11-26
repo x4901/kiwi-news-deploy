@@ -1,0 +1,54 @@
+- name: Install and start the kiwistand app
+  hosts: kn-node
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Clone the kiwistand repo
+      ansible.builtin.git:
+        repo: https://github.com/attestate/kiwistand.git
+        dest: /home/knuser/kiwistand
+        update: false
+        single_branch: true
+        version: "v0.9"
+        force: true
+        accept_newhostkey: true
+    - name: Install the kiwistand dependencies
+      ansible.builtin.shell: |
+        cd /home/knuser/kiwistand
+        npm install
+        cd src/web
+        npm install --force
+    - name: Copy the .env file
+      ansible.builtin.template:
+        src: data/dot-env.j2
+        dest: /home/knuser/kiwistand/.env
+        owner: knuser
+        group: knuser
+        mode: '0640'
+    - name: Copy the ecosystem file
+      ansible.builtin.template:
+        src: data/ecosystem.config.js.j2
+        dest: /home/knuser/kiwistand/ecosystem.config.js
+        owner: knuser
+        group: knuser
+        mode: '0640'
+    - name: Create data directory
+      ansible.builtin.file:
+        path: /home/knuser/kiwistand/bootstrap
+        state: directory
+        owner: knuser
+        group: knuser
+        mode: '0755'
+    - name: Create cache directory
+      ansible.builtin.file:
+        path: /home/knuser/kiwistand/cache
+        state: directory
+        owner: knuser
+        group: knuser
+        mode: '0755'
+    - name: Configure pm2
+      ansible.builtin.shell: |
+        cd /home/knuser/kiwistand
+        /usr/local/lib/npm/bin/pm2 install pm2-logrotate
+        /usr/local/lib/npm/bin/pm2 set pm2-logrotate:compress true
+

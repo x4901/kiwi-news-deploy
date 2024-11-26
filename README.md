@@ -4,9 +4,9 @@ Using Terraform to create a VM and Ansible scripts to install and run the Kiwi N
 
 ## Creating a VM with Terraform
 
-This example uses the Hetzner Cloud, but since the requirements are minimal other providers could be used easily.
+This example uses the Hetzner Cloud, but since the requirements are minimal, other providers could be used easily instead.
 
-The recipe creates one small VM with 4GB RAM and 40GB disk space. Node.js and npm are pre-installed.
+The recipe creates one small VM with 4GB RAM and 40GB disk space. 
 
 ```sh
 cd tf
@@ -22,9 +22,18 @@ Terraform will respond with the IP address of the created VM:
 
 ## Adding the Kiwi News software with Ansible
 
+### Install the required Ansible modules
+
+```sh
+cd ansible
+ansible-galaxy install -r requirements.yml
+```
+
 ### Check the Ansible inventory for the new node
 
-Due to our configuration, Ansible can access information about the resources we just created. Executing
+Due to our configuration, Ansible can access information about the resources we just created.
+
+Executing
 
 ```sh
 cd ansible
@@ -63,7 +72,7 @@ Installs the Kiwi News app and installs all dependencies.
 
 ## Run the Kiwi News app
 
-Initialize the database by running the sync script for a few minutes:
+Initialize the database by running the sync script for some time:
 
 ```sh
 npm run sync

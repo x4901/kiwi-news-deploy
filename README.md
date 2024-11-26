@@ -1,6 +1,7 @@
 # Initializing a Kiwi News node
 
-Using Terraform to create a VM and Ansible scripts to install and run the Kiwi News app.
+Using Terraform to create a VM and Ansible scripts to install and run the [Kiwi News](https://news.kiwistand.com/) app. 
+Each node participates in the decentralized *Kiwi News* network for crypto-related news.
 
 ## Creating a VM with Terraform
 
